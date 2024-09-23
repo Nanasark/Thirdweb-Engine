@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: always
+
+  redis:
+    image: redis:7.2.4
+    ports:
+      - "6379:6379"
+    restart: always
+
+  engine-server:
+    image: thirdweb/engine:latest
+    ports:
+      - "3005:3005"
+    environment:
+      ENCRYPTION_PASSWORD: ${ENCRYPTION_PASSWORD}
+      THIRDWEB_API_SECRET_KEY: ${THIRDWEB_API_SECRET_KEY}
+      ADMIN_WALLET_ADDRESS: ${ADMIN_WALLET_ADDRESS}
+      POSTGRES_CONNECTION_URL: "postgresql://postgres:postgres@host.docker.internal:5432/postgres?sslmode=disable"
+      ENABLE_HTTPS: "true"
+      REDIS_URL: "redis://host.docker.internal:6379/0"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+    restart: always
