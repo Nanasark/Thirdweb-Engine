@@ -23,9 +23,9 @@ services:
       ENCRYPTION_PASSWORD: ${ENCRYPTION_PASSWORD}
       THIRDWEB_API_SECRET_KEY: ${THIRDWEB_API_SECRET_KEY}
       ADMIN_WALLET_ADDRESS: ${ADMIN_WALLET_ADDRESS}
-      POSTGRES_CONNECTION_URL: "postgresql://postgres:postgres@host.docker.internal:5432/postgres?sslmode=disable"
-      ENABLE_HTTPS: "true"
-      REDIS_URL: "redis://host.docker.internal:6379/0"
+      POSTGRES_CONNECTION_URL: ${POSTGRES_CONNECTION_URL}
+      ENABLE_HTTPS: ${ENABLE_HTTPS}
+      REDIS_URL: ${REDIS_URL}
     deploy:
       resources:
         limits:
